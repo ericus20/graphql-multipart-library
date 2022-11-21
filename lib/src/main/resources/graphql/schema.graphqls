@@ -1,0 +1,21 @@
+scalar Upload
+
+type Query {
+    ping: String @deprecated(reason: "https://stackoverflow.com/questions/59868942/graphql-a-schema-must-have-a-query-operation-defined")
+}
+
+type FileUploadResult {
+    id: String!
+}
+
+input User {
+    name: String!
+}
+
+input FileUploadRequest {
+    user: User!
+}
+
+type Mutation {
+    fileUpload(file: Upload!, request: FileUploadRequest!): FileUploadResult!
+}
