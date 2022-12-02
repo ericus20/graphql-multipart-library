@@ -15,8 +15,8 @@ import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerResponse;
 
+import static com.example.component.GraphQlMultipartHandler.SUPPORTED_REQUEST_MEDIA_TYPES;
 import static com.example.component.GraphQlMultipartHandler.SUPPORTED_RESPONSE_MEDIA_TYPES;
-import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 @Configuration
 class GraphQlConfiguration {
@@ -57,8 +57,9 @@ class GraphQlConfiguration {
         var path = properties.getPath();
         var builder = RouterFunctions.route();
         var graphqlMultipartHandler = new GraphQlMultipartHandler(webGraphQlHandler, partReader);
-        builder = builder.POST(path, RequestPredicates.contentType(MULTIPART_FORM_DATA)
+        builder = builder.POST(path, RequestPredicates.contentType(SUPPORTED_REQUEST_MEDIA_TYPES.toArray(MediaType[]::new))
                 .and(RequestPredicates.accept(SUPPORTED_RESPONSE_MEDIA_TYPES.toArray(MediaType[]::new))), graphqlMultipartHandler::handleRequest);
+
         return builder.build();
     }
 }

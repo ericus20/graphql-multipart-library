@@ -42,6 +42,9 @@ public class GraphQlMultipartHandler {
     private final WebGraphQlHandler graphQlHandler;
     private final PartReader partReader;
 
+    public static final List<MediaType> SUPPORTED_REQUEST_MEDIA_TYPES =
+            Arrays.asList(MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_GRAPHQL, MediaType.APPLICATION_JSON);
+
     public static final List<MediaType> SUPPORTED_RESPONSE_MEDIA_TYPES =
             Arrays.asList(MediaType.APPLICATION_GRAPHQL, MediaType.APPLICATION_JSON);
 
